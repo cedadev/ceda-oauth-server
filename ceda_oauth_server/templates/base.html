@@ -1,0 +1,26 @@
+{% extends "base_no_sidebar.html" %}
+{% load staticfiles %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static "css/oauth_server.css" %}" type="text/css" />
+{% endblock %}
+
+{% block userstatus %}
+    {% if user.is_authenticated %}
+        <ul>
+            <li>Logged in as {{ user }}</li>
+            <li>
+                <a href="{% url 'accounts_logout' %}">Logout</a>
+            </li>
+        </ul>
+    {% else %}
+        <ul>
+            <li>
+                <a href="{% url 'accounts_login' %}">Login</a>
+            </li>
+            <li>
+                <a href="https://services.ceda.ac.uk/cedasite/register/info/">Register</a>
+            </li>
+        </ul>
+    {% endif %}
+{% endblock %}

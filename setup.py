@@ -22,13 +22,14 @@ with open(os.path.join(here, 'README.md')) as f:
     README = f.read()
 
 requires = [
-    'django',
+    'django==1.9',
     'django-oauth-toolkit',
     'psycopg2',
     'django-bootstrap3',
     'django-wsgi',
     'ContrailOnlineCAService',
     'PasteDeploy',
+    'userdb_model',
 ]
 
 if __name__ == "__main__":
