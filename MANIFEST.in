@@ -1,0 +1,2 @@
+include *.ini *.md *.txt VERSION
+recursive-include ceda_auth ceda_oauth_server *.ico *.png *.gif *.css *.eot *.ttf *.svg *.woff *.js *.txt *.html *.xml
