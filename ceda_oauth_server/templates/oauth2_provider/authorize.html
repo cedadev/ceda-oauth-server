@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{# Prevent cookielaw banner due to https://github.com/evonove/django-oauth-toolkit/issues/315 #}
+{% block cookielaw_banner %}{% endblock %}
+
+{% block content %}
+    <div id="authorize" class="content-panel">
+        {% if not error %}
+        	<h4>Authorise external application</h4>
+            <div>
+                {% if form.errors or form.non_field_errors %}
+                    <ul class="messages" style="color: #FF0000;">
+                        {% if form.non_field_errors %}
+                            {% for error in form.non_field_errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        {% endif %}
+                        {% if form.errors %}
+                            {% for error in form.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+                {% endif %}
+
+                <p><strong>{{ application.name }}</strong> is requesting the following permissions:</p>
+                <ul class="scopes">
+                    {% for scope in scopes_descriptions %}
+                        <li>{{ scope }}</li>
+                    {% endfor %}
+                </ul>
+
+                <form id="authorizationForm" method="POST">
+        		    {% csrf_token %}
+
+                    {% for field in form %}
+                        {% if field.is_hidden %}{{ field }}{% endif %}
+                    {% endfor %}
+
+                    <div class="submit-row">
+                        <input type="submit" name="allow" value="Allow" />
+                        <input type="submit" value="Deny" />
+                    </div>
+                </form>
+            </div>
+        {% else %}
+            <h4 style="color: #F00;">Error: {{ error.error }}</h4>
+            <p>{{ error.description }}</p>
+        {% endif %}
+    </div>
+{% endblock %}
