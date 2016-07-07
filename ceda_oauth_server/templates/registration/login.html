@@ -20,6 +20,7 @@
         <p>&nbsp;</p>
         <form id="auth_form" name="auth_form" action="" method="post">
 		    {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next }}" />
             <table border="0">
                 <tr>
                     <td class="field_name">

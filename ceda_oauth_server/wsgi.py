@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 WSGI config for the CEDA OAuth2 Server.
 
@@ -9,8 +10,10 @@ https://docs.djangoproject.com/en/1.9/howto/deployment/wsgi/
 
 import os
 
-from django.core.wsgi import get_wsgi_application
+import django
+import django_wsgi.handler
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "ceda_oauth_server.settings")
 
-application = get_wsgi_application()
+django.setup()
+application = django_wsgi.handler.APPLICATION

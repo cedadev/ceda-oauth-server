@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Database router that redirects operations on the CEDA userdb models to a database
 named ``ceda_userdb``. This database must be configured in ``DATABASES``, and the
