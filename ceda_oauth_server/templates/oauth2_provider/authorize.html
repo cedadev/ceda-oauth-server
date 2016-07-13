@@ -45,7 +45,9 @@
             </div>
         {% else %}
             <h4 style="color: #F00;">Error: {{ error.error }}</h4>
-            <p>{{ error.description }}</p>
+            <div>
+                <p>{{ error.description }}</p>
+            </div>
         {% endif %}
     </div>
 {% endblock %}
