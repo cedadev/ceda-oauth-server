@@ -30,7 +30,6 @@ requires = [
     'ContrailOnlineCAService',
     'PasteDeploy',
     'userdb_model',
-    'waitress',
 ]
 
 if __name__ == "__main__":

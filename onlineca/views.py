@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Views for the Online CA app. These are wrappers around the Online CA WSGI app.
 """
