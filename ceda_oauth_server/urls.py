@@ -25,7 +25,6 @@ urlpatterns = [
     url(r'^oauth/', include([
         url(r'^authorize$', oauth_views.AuthorizationView.as_view(), name="authorize"),
         url(r'^access_token$', oauth_views.TokenView.as_view(), name="token"),
-        url(r'^revoke_token/$', oauth_views.RevokeTokenView.as_view(), name="revoke-token"),
     ])),
     # Include profile oauth endpoints
     url(r'^oauth/', include('ceda_auth.urls')),

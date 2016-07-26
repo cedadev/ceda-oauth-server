@@ -83,7 +83,15 @@ def jasmin_link(request, ceda_user):
                 'error_message' : 'jasminaccountid must be present in POST data',
             }
         )
-    jasminaccountid = request.POST['jasminaccountid']
+    jasminaccountid = request.POST['jasminaccountid'].strip()
+    if not jasminaccountid:
+        return JsonResponse(
+            status = 400,
+            data = {
+                'status' : 'error',
+                'error_message' : 'jasminaccountid must not be empty',
+            }
+        )
     # If the jasminaccountid is already linked to a different CEDA account, return
     # a 409 Conflict response
     if User.objects.filter(jasminaccountid__iexact = jasminaccountid)  \
