@@ -11,6 +11,13 @@ from django.contrib.admin.sites import NotRegistered
 
 from oauth2_provider.models import Grant, AccessToken, RefreshToken
 
+from userdb_model.models import User
+
+
+@admin.register(User)
+class UserAdmin(admin.ModelAdmin):
+    list_display = ('accountid', 'emailaddress', 'jasminaccountid')
+
 
 try:
     admin.site.unregister(Grant)
