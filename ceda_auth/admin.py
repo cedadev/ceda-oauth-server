@@ -16,7 +16,9 @@ from userdb_model.models import User
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('accountid', 'emailaddress', 'jasminaccountid')
+    list_display = ('accountid', 'jasminaccountid')
+    fields = ('accountid', 'jasminaccountid')
+    readonly_fields = ('accountid', )
 
 
 try:

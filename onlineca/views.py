@@ -12,7 +12,7 @@ from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_safe, require_POST
 from django.utils.decorators import decorator_from_middleware
-from django.http import HttpResponseForbidden
+from django.http import HttpResponse, HttpResponseForbidden
 from django.contrib.auth import authenticate
 
 from paste.deploy import loadapp
@@ -47,12 +47,8 @@ def certificate(request):
     if not request.user.is_authenticated():
         return HttpResponseForbidden()
     # Try to retrieve the openid for the user
-    try:
-        ceda_user = User.objects.get(accountid = request.user.username)
-    except User.DoesNotExist:
-        pass
-    else:
-        request.environ['OPENID'] = ceda_user.openid
+    ceda_user = User.objects.get(accountid = request.user.username)
+    request.environ['OPENID'] = ceda_user.openid
     return call_wsgi_app(onlineca_app, request, '/certificate/')
 
 
@@ -87,7 +83,11 @@ def require_http_basic_auth(view):
                 if user:
                     request.user = user
                     return view(request, *args, **kwargs)
-        return HttpResponseForbidden()
+        # If auth failed, send back a 401 with a challenge
+        response = HttpResponse()
+        response.status_code = 401
+        response['WWW-Authenticate'] = 'Basic realm="{}"'.format(settings.BASIC_AUTH_REALM)
+        return response
     return _decorator
 
 @require_http_basic_auth
