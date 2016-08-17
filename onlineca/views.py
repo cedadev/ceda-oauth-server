@@ -86,7 +86,7 @@ def require_http_basic_auth(view):
         # If auth failed, send back a 401 with a challenge
         response = HttpResponse()
         response.status_code = 401
-        response['WWW-Authenticate'] = 'Basic realm="{}"'.format(settings.BASIC_AUTH_REALM)
+        response['WWW-Authenticate'] = 'Basic realm="%s"' % settings.BASIC_AUTH_REALM
         return response
     return _decorator
 

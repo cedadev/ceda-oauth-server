@@ -13,6 +13,8 @@ from django.contrib.auth import views as auth_views
 
 from oauth2_provider import views as oauth_views
 
+from dot_restrict_scopes import views as restrict_views
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -23,7 +25,7 @@ urlpatterns = [
     # We only provide the token-issuing OAuth URLs from oauth2_provider at custom endpoints
     # Applications are managed only via the admin interface
     url(r'^oauth/', include([
-        url(r'^authorize$', oauth_views.AuthorizationView.as_view(), name="authorize"),
+        url(r'^authorize$', restrict_views.AuthorizationView.as_view(), name="authorize"),
         url(r'^access_token$', oauth_views.TokenView.as_view(), name="token"),
     ])),
     # Include profile oauth endpoints
