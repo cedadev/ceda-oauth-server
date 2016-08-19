@@ -8,6 +8,7 @@ __copyright__ = "Copyright 2015 UK Science and Technology Facilities Council"
 
 from django.contrib import admin
 from django.contrib.admin.sites import NotRegistered
+from django.db import models
 
 from oauth2_provider.models import Grant, AccessToken, RefreshToken
 
@@ -28,10 +29,12 @@ class _HasJASMINAccount(admin.SimpleListFilter):
         )
 
     def queryset(self, request, queryset):
+        has_jasmin_account = models.Q(jasminaccountid__isnull = False)  \
+                           & ~models.Q(jasminaccountid__iexact = '')
         if self.value() == self.OPTION_YES:
-            return queryset.filter(jasminaccountid__isnull = False)
+            return queryset.filter(has_jasmin_account)
         elif self.value() == self.OPTION_NO:
-            return queryset.filter(jasminaccountid__isnull = True)
+            return queryset.filter(~has_jasmin_account)
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
