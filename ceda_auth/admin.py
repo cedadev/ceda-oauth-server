@@ -19,8 +19,8 @@ class _HasJASMINAccount(admin.SimpleListFilter):
     title = 'has JASMIN account'
     parameter_name = 'has_jasmin_account'
 
-    OPTION_YES = 1
-    OPTION_NO = 2
+    OPTION_YES = '1'
+    OPTION_NO = '0'
 
     def lookups(self, request, model_admin):
         return (
