@@ -14,11 +14,33 @@ from oauth2_provider.models import Grant, AccessToken, RefreshToken
 from userdb_model.models import User
 
 
+class _HasJASMINAccount(admin.SimpleListFilter):
+    title = 'has JASMIN account'
+    parameter_name = 'has_jasmin_account'
+
+    OPTION_YES = 1
+    OPTION_NO = 2
+
+    def lookups(self, request, model_admin):
+        return (
+            (self.OPTION_YES, 'Yes'),
+            (self.OPTION_NO, 'No'),
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() == self.OPTION_YES:
+            return queryset.filter(jasminaccountid__isnull = False)
+        elif self.value() == self.OPTION_NO:
+            return queryset.filter(jasminaccountid__isnull = True)
+
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
     list_display = ('accountid', 'jasminaccountid')
+    list_filter = (_HasJASMINAccount, )
     fields = ('accountid', 'jasminaccountid')
     readonly_fields = ('accountid', )
+    ordering = ('accountid', )
+    search_fields = ('accountid', 'jasminaccountid')
 
 
 try:
