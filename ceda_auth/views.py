@@ -6,7 +6,7 @@ Views for the Online CA app. These are wrappers around the Online CA WSGI app.
 __author__ = "Matt Pryor"
 __copyright__ = "Copyright 2015 UK Science and Technology Facilities Council"
 
-import functools
+import functools, re
 
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
@@ -63,6 +63,8 @@ def profile(request, ceda_user):
     })
 
 
+_JASMIN_ACCOUNT_ID_REGEX = '^[a-zA-Z][a-zA-Z0-9_-]+[a-zA-Z0-9]$'
+
 @protected_resource(scopes = [settings.JASMIN_LINK_SCOPE])
 @require_oauth_token
 @csrf_exempt
@@ -84,12 +86,13 @@ def jasmin_link(request, ceda_user):
             }
         )
     jasminaccountid = request.POST['jasminaccountid'].strip()
-    if not jasminaccountid:
+    # Validate the jasmin account id
+    if not re.match(_JASMIN_ACCOUNT_ID_REGEX, jasminaccountid):
         return JsonResponse(
             status = 400,
             data = {
                 'status' : 'error',
-                'error_message' : 'jasminaccountid must not be empty',
+                'error_message' : 'jasminaccountid did not match required format',
             }
         )
     # If the jasminaccountid is already linked to a different CEDA account, return
@@ -114,22 +117,9 @@ def jasmin_link(request, ceda_user):
                 'error_message' : 'CEDA account is already linked with another JASMIN account',
             }
         )
-    ceda_user.jasminaccountid = jasminaccountid
-    try:
-        ceda_user.full_clean()
-    except ValidationError as e:
-        # If a validation error occurs, respond with 422 Unprocessable Entity
-        return JsonResponse(
-            status = 422,
-            data = {
-                'status' : 'error',
-                'error_message' : 'Validation failed',
-                'validation_errors' : e.message_dict,
-            }
-        )
-    else:
-        ceda_user.save()
-        return JsonResponse({
-            'status' : 'success',
-            'message' : 'JASMIN account linked successfully',
-        })
+    # Update the jasminaccountid directly, to avoid changing any other fields accidentally
+    User.objects.filter(accountid = ceda_user.accountid).update(jasminaccountid = jasminaccountid)
+    return JsonResponse({
+        'status' : 'success',
+        'message' : 'JASMIN account linked successfully',
+    })
