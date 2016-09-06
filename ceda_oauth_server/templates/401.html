@@ -4,6 +4,10 @@
 
 {% block title %}Error{% endblock %}
 
+{# Empty blocks for blocks that require a request in the context #}
+{% block userstatus %}{% endblock %}
+{% block cookielaw_banner %}{% endblock %}
+
 {% block main %}
 <p>Error: 401 - Unauthorized</p>
 <p>For help, please contact the <a href="mailto:support@ceda.ac.uk">CEDA Helpdesk</a>.</p>
