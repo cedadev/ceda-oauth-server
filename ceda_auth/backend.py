@@ -23,6 +23,8 @@ class CEDAUserDBBackend(ModelBackend):
         """
         Attempt to authenticate the given username/password combination.
         """
+        if not username or not password:
+            return None
         try:
             ceda_user = User.objects.get(accountid = username)
         except User.DoesNotExist:
