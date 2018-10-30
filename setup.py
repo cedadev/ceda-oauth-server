@@ -1,42 +1,19 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python3
 
-import os, re
-
+import os
 from setuptools import setup, find_packages
 
+
 here = os.path.abspath(os.path.dirname(__file__))
-
-try:
-    import ceda_oauth_server.__version__ as version
-except ImportError:
-    # If we get an import error, find the version string manually
-    version = "unknown"
-    with open(os.path.join(here, 'ceda_oauth_server', '__init__.py')) as f:
-        for line in f:
-            match = re.search('__version__ *= *[\'"](?P<version>.+)[\'"]', line)
-            if match:
-                version = match.group('version')
-                break
-
 with open(os.path.join(here, 'README.md')) as f:
     README = f.read()
 
-requires = [
-    'django==1.9',
-    'django-oauth-toolkit',
-    'psycopg2',
-    'django-bootstrap3',
-    'django-wsgi',
-    'ContrailOnlineCAService',
-    'PasteDeploy',
-    'userdb_model',
-]
 
 if __name__ == "__main__":
-
     setup(
         name = 'ceda-oauth-server',
-        version = version,
+        setup_requires = ['setuptools_scm'],
+        use_scm_version = True,
         description = 'OAuth2 provider for CEDA account information',
         long_description = README,
         classifiers = [
@@ -47,12 +24,20 @@ if __name__ == "__main__":
         ],
         author = 'Matt Pryor',
         author_email = 'matt.pryor@stfc.ac.uk',
-        url = 'http://www.ceda.ac.uk',
+        url = 'https://github.com/cedadev/ceda-oauth-server',
         keywords = 'web django ceda oauth2',
         packages = find_packages(),
         include_package_data = True,
         zip_safe = False,
-        install_requires = requires,
-        tests_require = requires,
-        test_suite = "ceda_oauth_server.test",
+        install_requires = [
+            'django',
+            'django-oauth-toolkit',
+            'psycopg2',
+            'django-bootstrap3',
+            'userdb_model',
+            'dot-restrict-scopes',
+            'django-onlineca',
+            'fwtheme-django',
+            'fwtheme-django-ceda-serv',
+        ]
     )

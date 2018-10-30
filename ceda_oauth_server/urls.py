@@ -13,23 +13,29 @@ from django.contrib.auth import views as auth_views
 
 from oauth2_provider import views as oauth_views
 
-from dot_restrict_scopes import views as restrict_views
-
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     # Use the built-in authentication views
-    url(r'^accounts/login$', auth_views.login, name = 'accounts_login'),
-    url(r'^accounts/logout$', auth_views.logout,
-                              { 'next_page' : settings.LOGIN_URL }, name = 'accounts_logout'),
-    # We only provide the token-issuing OAuth URLs from oauth2_provider at custom endpoints
-    # Applications are managed only via the admin interface
+    url(r'^accounts/login$',
+        auth_views.LoginView.as_view(),
+        name = 'accounts_login'),
+    url(r'^accounts/logout$',
+        auth_views.LogoutView.as_view(),
+        { 'next_page' : settings.LOGIN_URL },
+        name = 'accounts_logout'),
+    # We only provide the token-issuing OAuth URLs from oauth2_provider at custom endpoints
+    # Applications are managed only via the admin interface
     url(r'^oauth/', include([
-        url(r'^authorize$', restrict_views.AuthorizationView.as_view(), name="authorize"),
-        url(r'^access_token$', oauth_views.TokenView.as_view(), name="token"),
+        url(r'^authorize$',
+            oauth_views.AuthorizationView.as_view(),
+            name="authorize"),
+        url(r'^access_token$',
+            oauth_views.TokenView.as_view(),
+            name="token"),
     ])),
     # Include profile oauth endpoints
     url(r'^oauth/', include('ceda_auth.urls')),
-    # Include urls for the Online CA
-    url(r'^', include('onlineca.urls')),
+    # Include urls for the Online CA
+    url(r'^', include('ceda_onlineca.urls')),
 ]
