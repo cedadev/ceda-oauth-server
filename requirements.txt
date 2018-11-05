@@ -11,8 +11,9 @@ django-bootstrap3==11.0.0
 django-classy-tags==0.8.0
 django-cookie-law==2.0.1
 django-oauth-toolkit==1.2.0
--e git+https://github.com/cedadev/django-onlineca.git@3d41f51e31d45938e17ff4a1086f58631b74473e#egg=onlineca
+# Order is important in this file - django-settings object must appear before django-onlineca and dot-restrict-scopes
 -e git+https://github.com/cedadev/django-settings-object.git@0f88e7d3693f1767b6f11f577d7efacf836932bb#egg=settings_object
+-e git+https://github.com/cedadev/django-onlineca.git@3d41f51e31d45938e17ff4a1086f58631b74473e#egg=onlineca
 -e git+https://github.com/cedadev/dot-restrict-scopes.git@19a4327437c1718bd255772d86aa1f09e5851f9a#egg=dot_restrict_scopes
 -e git+https://github.com/cedadev/fwtheme-django.git@72e5ebad168a1bd59c48f9d85d934d1db5d24c30#egg=fwtheme_django
 -e git+https://github.com/cedadev/fwtheme-django-ceda-serv.git@0b2b5fdcae88d620ed3ec82c43e468c8d0242552#egg=fwtheme_django_ceda_serv
