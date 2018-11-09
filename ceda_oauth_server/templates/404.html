@@ -1,14 +1,5 @@
-{% extends "oauth_base.html" %}
+{% extends "error_base.html" %}
 
-{% block meta_title %}Error: 404 - Page not found{% endblock %}
-
-{% block title %}Error{% endblock %}
-
-{# Empty blocks for blocks that require a request in the context #}
-{% block userstatus %}{% endblock %}
-{% block cookielaw_banner %}{% endblock %}
-
-{% block main %}
-<p>Error: 404 - Page not found</p>
-<p>For help, please contact the <a href="mailto:support@ceda.ac.uk">CEDA Helpdesk</a>.</p>
-{% endblock %}
+{% block error_code %}404{% endblock %}
+{% block error_text %}Not Found{% endblock %}
+{% block error_details %}<p>The requested page could not be found.</p>{% endblock %}

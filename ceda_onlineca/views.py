@@ -46,7 +46,7 @@ def require_http_basic_auth(view):
     """
     @functools.wraps(view)
     def _decorated(request, *args, **kwargs):
-        if request.META.has_key('HTTP_AUTHORIZATION'):
+        if 'HTTP_AUTHORIZATION' in request.META:
             authmeth, auth = request.META['HTTP_AUTHORIZATION'].split(' ', 1)
             if authmeth.lower() == 'basic':
                 username, password = auth.strip().decode('base64').split(':', 1)

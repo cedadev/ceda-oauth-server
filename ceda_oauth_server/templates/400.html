@@ -1,14 +1,7 @@
-{% extends "oauth_base.html" %}
+{% extends "error_base.html" %}
 
-{% block meta_title %}Error: 400 - Bad request{% endblock %}
-
-{% block title %}Error{% endblock %}
-
-{# Empty blocks for blocks that require a request in the context #}
-{% block userstatus %}{% endblock %}
-{% block cookielaw_banner %}{% endblock %}
-
-{% block main %}
-<p>Error: 400 - Bad request</p>
-<p>For help, please contact the <a href="mailto:support@ceda.ac.uk">CEDA Helpdesk</a>.</p>
+{% block error_code %}400{% endblock %}
+{% block error_text %}Bad Request{% endblock %}
+{% block error_details %}
+    <p>This is usually caused by an error in the tool you are using to make the request.</p>
 {% endblock %}

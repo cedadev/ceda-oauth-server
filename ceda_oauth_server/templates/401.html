@@ -1,14 +1,5 @@
-{% extends "oauth_base.html" %}
+{% extends "error_base.html" %}
 
-{% block meta_title %}Error: 401 - Unauthorized{% endblock %}
-
-{% block title %}Error{% endblock %}
-
-{# Empty blocks for blocks that require a request in the context #}
-{% block userstatus %}{% endblock %}
-{% block cookielaw_banner %}{% endblock %}
-
-{% block main %}
-<p>Error: 401 - Unauthorized</p>
-<p>For help, please contact the <a href="mailto:support@ceda.ac.uk">CEDA Helpdesk</a>.</p>
-{% endblock %}
+{% block error_code %}401{% endblock %}
+{% block error_text %}Unauthorized{% endblock %}
+{% block error_details %}<p>The request could not be authenticated.</p>{% endblock %}
