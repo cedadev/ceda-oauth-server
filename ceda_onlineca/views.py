@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-Views for the Online CA app. These are wrappers around the Online CA WSGI app.
+Views for the CEDA Online CA app.
 """
 
 __author__ = "Matt Pryor"
-__copyright__ = "Copyright 2015 UK Science and Technology Facilities Council"
+__copyright__ = "Copyright 2018 UK Science and Technology Facilities Council"
 
 import functools
 import base64

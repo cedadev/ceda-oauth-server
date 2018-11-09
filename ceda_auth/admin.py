@@ -4,7 +4,7 @@ from the oauth2_provider to be a bit friendlier.
 """
 
 __author__ = "Matt Pryor"
-__copyright__ = "Copyright 2015 UK Science and Technology Facilities Council"
+__copyright__ = "Copyright 2018 UK Science and Technology Facilities Council"
 
 from django.contrib import admin
 from django.contrib.admin.sites import NotRegistered

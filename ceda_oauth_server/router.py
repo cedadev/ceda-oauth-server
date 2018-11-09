@@ -14,7 +14,7 @@ router specified in ``DATABASE_ROUTERS``:
 """
 
 __author__ = "Matt Pryor"
-__copyright__ = "Copyright 2015 UK Science and Technology Facilities Council"
+__copyright__ = "Copyright 2018 UK Science and Technology Facilities Council"
 
 
 class Router:
