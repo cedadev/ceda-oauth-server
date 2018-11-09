@@ -1,14 +1,7 @@
-{% extends "oauth_base.html" %}
+{% extends "error_base.html" %}
 
-{% block meta_title %}Error: 500 - Server error{% endblock %}
+{% block head_title %}Internal Server Error | CEDA{% endblock %}
+{% block page_title %}<h1>Internal Server Error</h1>{% endblock %}
+{% block card_title %}500 Internal Server Error{% endblock %}
 
-{% block title %}Error{% endblock %}
-
-{# Empty blocks for blocks that require a request in the context #}
-{% block userstatus %}{% endblock %}
-{% block cookielaw_banner %}{% endblock %}
-
-{% block main %}
-<p>Error: 500- Server error</p>
-<p>For help, please contact the <a href="mailto:support@ceda.ac.uk">CEDA Helpdesk</a>.</p>
-{% endblock %}
+{% block error_details %}<p>An unexpected error occurred.</p>{% endblock %}
