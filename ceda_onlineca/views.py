@@ -7,6 +7,7 @@ __author__ = "Matt Pryor"
 __copyright__ = "Copyright 2015 UK Science and Technology Facilities Council"
 
 import functools
+import base64
 
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
@@ -47,9 +48,11 @@ def require_http_basic_auth(view):
     @functools.wraps(view)
     def _decorated(request, *args, **kwargs):
         if 'HTTP_AUTHORIZATION' in request.META:
-            authmeth, auth = request.META['HTTP_AUTHORIZATION'].split(' ', 1)
+            authmeth, auth_b64 = request.META['HTTP_AUTHORIZATION'].split(' ', 1)
             if authmeth.lower() == 'basic':
-                username, password = auth.strip().decode('base64').split(':', 1)
+                # Decode the base64 encoded string
+                auth = base64.b64decode(auth_b64.strip().encode()).decode()
+                username, password = auth.split(':', 1)
                 user = authenticate(username = username, password = password)
                 if user:
                     request.user = user
