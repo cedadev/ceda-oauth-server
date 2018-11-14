@@ -35,7 +35,7 @@ def with_ceda_user(view):
     @functools.wraps(view)
     def wrapper(request, *args, **kwargs):
         # The user must be authenticated
-        if not request.user.is_authenticated():
+        if not request.user.is_authenticated:
             return HttpResponseForbidden()
         # If the user is successfully logged in, this should not fail
         kwargs['ceda_user'] = User.objects.get(accountid = request.user.username)
