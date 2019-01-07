@@ -1,12 +1,12 @@
 asn1crypto==0.24.0
-certifi==2018.10.15
+certifi==2018.11.29
 cffi==1.11.5
 chardet==3.0.4
 ContrailCA==0.4.0
 crypto-cookie==0.3.1
-cryptography==2.3.1
+cryptography==2.4.2
 -e git+https://github.com/cedadev/dj-security-middleware.git@a274146198848db1684c366400d57376509b52d9#egg=dj_security_middleware
-Django==2.1.3
+Django==2.1.5
 django-bootstrap3==11.0.0
 django-classy-tags==0.8.0
 django-cookie-law==2.0.1
@@ -17,14 +17,14 @@ django-oauth-toolkit==1.2.0
 -e git+https://github.com/cedadev/dot-restrict-scopes.git@19a4327437c1718bd255772d86aa1f09e5851f9a#egg=dot_restrict_scopes
 -e git+https://github.com/cedadev/fwtheme-django.git@72e5ebad168a1bd59c48f9d85d934d1db5d24c30#egg=fwtheme_django
 -e git+https://github.com/cedadev/fwtheme-django-ceda-serv.git@0b2b5fdcae88d620ed3ec82c43e468c8d0242552#egg=fwtheme_django_ceda_serv
-idna==2.7
+idna==2.8
 oauthlib==2.1.0
-psycopg2==2.7.5
+psycopg2==2.7.6.1
 pycparser==2.19
 pyOpenSSL==18.0.0
 pytest-runner==4.2
-pytz==2018.7
-requests==2.20.0
-six==1.11.0
+pytz==2018.9
+requests==2.21.0
+six==1.12.0
 urllib3==1.24.1
 -e git+https://gitlab+deploy-token-1:sKsnsW2XMsbsbZRxM7DD@breezy.badc.rl.ac.uk/mpryor/userdb-model.git@981b70a67a58ebe6ddfaf3c00d38b5e4a3a06c25#egg=userdb_model
