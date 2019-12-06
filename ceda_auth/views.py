@@ -23,7 +23,7 @@ from oauth2_provider.middleware import OAuth2TokenMiddleware
 from userdb_model.models import User
 
 
-# Convert the OAuth token middleware into a view decorator
+# Convert the OAuth token middleware into a view decorator
 require_oauth_token = decorator_from_middleware(OAuth2TokenMiddleware)
 
 
@@ -76,7 +76,7 @@ def jasmin_link(request, ceda_user):
 
     Attempts to link the specified JASMIN account with the currently logged in CEDA account.
     """
-    # The POST data must be present
+    # The POST data must be present
     if 'jasminaccountid' not in request.POST:
         return JsonResponse(
             status = 400,
@@ -95,8 +95,8 @@ def jasmin_link(request, ceda_user):
                 'error_message' : 'jasminaccountid did not match required format',
             }
         )
-    # If the jasminaccountid is already linked to a different CEDA account, return
-    # a 409 Conflict response
+    # If the jasminaccountid is already linked to a different CEDA account, return
+    # a 409 Conflict response
     if User.objects.filter(jasminaccountid__iexact = jasminaccountid)  \
                    .exclude(accountid = ceda_user.accountid)  \
                    .exists():
@@ -107,8 +107,8 @@ def jasmin_link(request, ceda_user):
                 'error_message' : 'JASMIN account is already linked with another CEDA account',
             }
         )
-    # If the CEDA account is already linked to a different JASMIN account, return
-    # a 409 Conflict response
+    # If the CEDA account is already linked to a different JASMIN account, return
+    # a 409 Conflict response
     if ceda_user.jasminaccountid and ceda_user.jasminaccountid != jasminaccountid:
         return JsonResponse(
             status = 409,
@@ -117,7 +117,7 @@ def jasmin_link(request, ceda_user):
                 'error_message' : 'CEDA account is already linked with another JASMIN account',
             }
         )
-    # Update the jasminaccountid directly, to avoid changing any other fields accidentally
+    # Update the jasminaccountid directly, to avoid changing any other fields accidentally
     User.objects.filter(accountid = ceda_user.accountid).update(jasminaccountid = jasminaccountid)
     return JsonResponse({
         'status' : 'success',

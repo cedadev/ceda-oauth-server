@@ -45,9 +45,7 @@ def ceda_user_to_django_user(view):
     return wrapper
 
 # Wrap the authorization view in the decorators
-oauth_authorize = dj_security(
-    ceda_user_to_django_user(oauth_views.AuthorizationView.as_view())
-)
+oauth_authorize = dj_security(ceda_user_to_django_user(oauth_views.AuthorizationView.as_view()))
 
 
 urlpatterns = [

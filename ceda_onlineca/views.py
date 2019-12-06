@@ -24,12 +24,12 @@ from onlineca import views as onlineca_views
 from userdb_model.models import User
 
 
-#: Decorator that checks the request for a valid OAuth token
+# Decorator that checks the request for a valid OAuth token
 require_oauth_token = decorator_from_middleware(OAuth2TokenMiddleware)
 
 
-@protected_resource(scopes = [settings.CERTIFICATE_SCOPE])
 @require_oauth_token
+@protected_resource(scopes = [settings.CERTIFICATE_SCOPE])
 @require_POST
 @csrf_exempt
 def certificate_oauth(request):
