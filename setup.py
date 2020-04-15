@@ -30,9 +30,9 @@ if __name__ == "__main__":
         include_package_data = True,
         zip_safe = False,
         install_requires = [
-            'django',
+            'django<3',
             'django-oauth-toolkit',
-            'psycopg2',
+            'psycopg2-binary',
             'django-bootstrap3',
             'userdb_model',
             'dot-restrict-scopes',
