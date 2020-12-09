@@ -39,7 +39,7 @@ def ceda_user_to_django_user(view):
         UserModel = get_user_model()
         try:
             request.user = UserModel.objects.get(username = username)
-        except LocalUser.DoesNotExist:
+        except UserModel.DoesNotExist:
             request.user = UserModel.objects.create_user(username)
         return view(request, *args, **kwargs)
     return wrapper
