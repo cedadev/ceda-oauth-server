@@ -31,7 +31,10 @@ if __name__ == "__main__":
         zip_safe = False,
         install_requires = [
             'django<3',
-            'django-oauth-toolkit',
+            # We need the old-style middleware for decorator_from_middleware
+            # This will soon be replaced with a reconfiguration of the JASMIN SLCS,
+            # so we don't invest a lot of time in fixing this now
+            'django-oauth-toolkit<1.4.0',
             'psycopg2-binary',
             'django-bootstrap3',
             'userdb_model',
