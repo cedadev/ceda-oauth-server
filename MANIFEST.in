@@ -1,0 +1,3 @@
+include *.txt *.md *.py
+recursive-include ceda_auth *
+recursive-include ceda_oauth_server *

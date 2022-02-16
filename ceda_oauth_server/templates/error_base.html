@@ -1,0 +1,15 @@
+{% extends "oauth_base.html" %}
+
+{# Empty blocks for blocks that require a request in the context #}
+{% block user_status %}{% endblock %}
+{% block cookielaw_banner %}{% endblock %}
+
+{% block content %}
+    <div class="card text-white bg-danger">
+        <h4 class="card-header">{% block card_title %}{% endblock %}</h4>
+        <div class="card-body">
+            {% block error_details %}{% endblock %}
+            <p>For help, please contact the <a href="https://help.ceda.ac.uk/">CEDA Helpdesk</a>.</p>
+        </div>
+    </div>
+{% endblock %}
